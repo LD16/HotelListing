@@ -4,6 +4,7 @@ using HotelListing.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelListing.API.Migrations
 {
     [DbContext(typeof(HotelListingDbContext))]
-    partial class HotetListingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220905152050_AddedIdentityTables")]
+    partial class AddedIdentityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -210,22 +212,6 @@ namespace HotelListing.API.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "5dcad56c-55e6-4418-80a0-91d0ebb3c083",
-                            ConcurrencyStamp = "89e450f8-dc72-45b9-8781-6ecd21c72f5d",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "1ad43d53-5947-41fb-8461-1bc4d0c80b17",
-                            ConcurrencyStamp = "6f38bdf3-8ee1-43e1-8116-e78b74eb4d4c",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

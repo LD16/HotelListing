@@ -10,6 +10,7 @@ using HotelListing.API.Dtos;
 using AutoMapper;
 using HotelListing.API.Dtos.Country;
 using HotelListing.API.Interfaces;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HotelListing.API.Controllers
 {
@@ -20,20 +21,22 @@ namespace HotelListing.API.Controllers
 
         private readonly IMapper _mapper;
         private readonly ICountriesRepository _repository;
+        private readonly ILogger<CountriesController> _logger;
 
-        public CountriesController(IMapper mapper, ICountriesRepository repository)
+        public CountriesController(IMapper mapper, ICountriesRepository repository, ILogger<CountriesController> logger)
         {
             _mapper = mapper;
             _repository = repository;
+            _logger = logger;
         }
 
         // GET: api/Countries
         [HttpGet]
+        [EnableQuery]
         public async Task<ActionResult<IEnumerable<GetCountryDto>>> GetCountries()
         {
             var countries = await _repository.GetAllAsync();
             var map = _mapper.Map<List<GetCountryDto>>(countries);
-
             return Ok(map);
         }
 
@@ -46,6 +49,7 @@ namespace HotelListing.API.Controllers
 
             if (country == null)
             {
+                _logger.LogWarning("No record found in GetCountry  method with id {1}", id);
                 return NotFound();
             }
 
