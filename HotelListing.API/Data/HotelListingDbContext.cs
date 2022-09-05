@@ -2,9 +2,9 @@
 
 namespace HotelListing.API.Data
 {
-    public class HotetListingDbContext:DbContext
+    public class HotelListingDbContext:DbContext
     {
-        public HotetListingDbContext(DbContextOptions options):base(options)
+        public HotelListingDbContext(DbContextOptions options):base(options)
         {
            
         }
